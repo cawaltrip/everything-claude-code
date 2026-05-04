@@ -24,7 +24,7 @@ Run these in order:
 ```bash
 terraform init -upgrade 2>&1 | head -50
 terraform validate 2>&1
-terraform plan -json -lock=false 2>&1 | jq . || terraform plan -lock=false 2>&1 | head -50
+terraform plan -json -lock=false 2>&1 | jq -s '.' || terraform plan -lock=false 2>&1 | head -50
 terraform state list 2>/dev/null || echo "state not accessible"
 terraform state show -json 2>/dev/null | jq . || echo "state show skipped"
 tflint --format compact 2>/dev/null || echo "tflint not installed"
@@ -106,8 +106,8 @@ terraform state list
 ### State Drift Detection
 
 ```bash
-# Refresh state without applying
-terraform refresh -lock=false
+# Refresh state without applying (`terraform refresh` is soft-deprecated since 0.15.4)
+terraform apply -refresh-only -lock=false
 
 # Show resource state
 terraform state show 'aws_instance.example'
@@ -191,7 +191,7 @@ Stop and escalate if:
 - Same error persists after 3 fix attempts
 - Fix introduces more errors than it resolves
 - Error requires architectural changes (e.g., complete state restructure, multi-account migration)
-- Borrow checker or syntax error suggests model misunderstanding
+- HCL parse error or plan output suggests structural misunderstanding of the module rather than a localized fix
 
 ## Output Format
 
