@@ -32,3 +32,5 @@ There is no native TF coverage tool. "Coverage" = whether each module path (inpu
 ## Reference
 
 See skill: `terraform-testing` for the test-framework decision matrix, mock-provider patterns, and TDD workflow adapted for IaC.
+
+When a test-writing task touches a non-trivial resource schema (any nested block whose set-vs-list shape is not obvious from the resource's HCL definition under test), also load skill: `terraform-mcp` to verify against the live registry. Recall is unreliable on set-vs-list distinctions; a single MCP lookup is far cheaper than the canonical set-indexing bug.
