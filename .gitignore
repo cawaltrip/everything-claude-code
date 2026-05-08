@@ -97,3 +97,8 @@ ecc2/target/
 .opencode/package-lock.json
 .opencode/node_modules/
 assets/images/security/badrudi-exploit.mp4
+
+# Terraform local artifacts inside reusable example modules
+# (compositions DO commit .terraform.lock.hcl; reusable modules do not)
+examples/terraform-aws-vpc-module/.terraform/
+examples/terraform-aws-vpc-module/.terraform.lock.hcl
