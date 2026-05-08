@@ -475,6 +475,8 @@ everything-claude-code/
 |   |-- kotlin-build-resolver.md # Kotlin/Gradle build errors
 |   |-- rust-reviewer.md     # Rust code review
 |   |-- rust-build-resolver.md # Rust build error resolution
+|   |-- terraform-reviewer.md # Terraform/OpenTofu code review (NEW)
+|   |-- terraform-build-resolver.md # Terraform/OpenTofu validate/init/plan errors (NEW)
 |   |-- pytorch-build-resolver.md # PyTorch/CUDA training errors
 |
 |-- skills/           # Workflow definitions and domain knowledge
@@ -542,6 +544,11 @@ everything-claude-code/
 |   |-- perl-testing/              # Perl TDD with Test2::V0, prove, Devel::Cover (NEW)
 |   |-- autonomous-loops/           # Autonomous loop patterns: sequential pipelines, PR loops, DAG orchestration (NEW)
 |   |-- plankton-code-quality/      # Write-time code quality enforcement with Plankton hooks (NEW)
+|   |-- terraform-patterns/         # Terraform/OpenTofu module hierarchy, naming, idioms (NEW)
+|   |-- terraform-testing/          # Terraform/OpenTofu native test, mock providers, decision matrix (NEW)
+|   |-- terraform-review/           # Terraform/OpenTofu workflow-shaped review skill (NEW)
+|   |-- terraform-security/         # IaC-class security checklist for TF/OT (NEW)
+|   |-- terraform-mcp/              # Live registry lookup via HashiCorp MCP server (NEW)
 |
 |-- commands/         # Maintained slash-entry compatibility; prefer skills/
 |   |-- plan.md             # /plan - Implementation planning
@@ -633,6 +640,8 @@ everything-claude-code/
 |   |-- django-api-CLAUDE.md      # Real-world Django REST API (DRF + Celery)
 |   |-- laravel-api-CLAUDE.md     # Real-world Laravel API (PostgreSQL + Redis) (NEW)
 |   |-- rust-api-CLAUDE.md        # Real-world Rust API (Axum + SQLx + PostgreSQL) (NEW)
+|   |-- terraform-CLAUDE.md       # Real-world Terraform/OpenTofu module project (AWS) (NEW)
+|   |-- terraform-aws-vpc-module/ # Reference VPC module — not published to a registry (NEW)
 |
 |-- mcp-configs/      # MCP server configurations
 |   |-- mcp-servers.json    # GitHub, Supabase, Vercel, Railway, etc.
@@ -949,6 +958,7 @@ rules/
   golang/          # Go specific patterns and tools
   swift/           # Swift specific patterns and tools
   php/             # PHP specific patterns and tools
+  terraform/       # Terraform/OpenTofu specific patterns and tools
 ```
 
 See [`rules/README.md`](rules/README.md) for installation and structure details.
@@ -1130,7 +1140,7 @@ Please contribute! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 - Language-specific skills (Rust, C#, Kotlin, Java) — Go, Python, Perl, Swift, and TypeScript already included
 - Framework-specific configs (Rails, FastAPI) — Django, NestJS, Spring Boot, and Laravel already included
-- DevOps agents (Kubernetes, Terraform, AWS, Docker)
+- DevOps agents (Kubernetes, AWS, Docker) — Terraform/OpenTofu already included
 - Testing strategies (different frameworks, visual regression)
 - Domain-specific knowledge (ML, data engineering, mobile)
 
