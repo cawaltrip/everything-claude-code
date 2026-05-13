@@ -89,7 +89,7 @@ This repo is the raw code only. The guides explain everything.
 ### v2.0.0-rc.1 — Surface Refresh, Operator Workflows, and ECC 2.0 Alpha (Apr 2026)
 
 - **Dashboard GUI** — New Tkinter-based desktop application (`ecc_dashboard.py` or `npm run dashboard`) with dark/light theme toggle, font customization, and project logo in header and taskbar.
-- **Public surface synced to the live repo** — metadata, catalog counts, plugin manifests, and install-facing docs now match the actual OSS surface: 48 agents, 182 skills, and 68 legacy command shims.
+- **Public surface synced to the live repo** — metadata, catalog counts, plugin manifests, and install-facing docs now match the actual OSS surface: 50 agents, 188 skills, and 68 legacy command shims.
 - **Operator and outbound workflow expansion** — `brand-voice`, `social-graph-ranker`, `connections-optimizer`, `customer-billing-ops`, `ecc-tools-cost-audit`, `google-workspace-ops`, `project-flow-ops`, and `workspace-surface-audit` round out the operator lane.
 - **Media and launch tooling** — `manim-video`, `remotion-video-creation`, and upgraded social publishing surfaces make technical explainers and launch content part of the same system.
 - **Framework and product surface growth** — `nestjs-patterns`, richer Codex/OpenCode install surfaces, and expanded cross-harness packaging keep the repo usable beyond Claude Code alone.
@@ -350,7 +350,7 @@ If you stacked methods, clean up in this order:
 /plugin list everything-claude-code@everything-claude-code
 ```
 
-**That's it!** You now have access to 48 agents, 182 skills, and 68 legacy command shims.
+**That's it!** You now have access to 50 agents, 188 skills, and 68 legacy command shims.
 
 ### Dashboard GUI
 
@@ -549,6 +549,7 @@ everything-claude-code/
 |   |-- terraform-review/           # Terraform/OpenTofu workflow-shaped review skill (NEW)
 |   |-- terraform-security/         # IaC-class security checklist for TF/OT (NEW)
 |   |-- terraform-mcp/              # Live registry lookup via HashiCorp MCP server (NEW)
+|   |-- opentofu-mcp/               # Live registry lookup via OpenTofu MCP server (no Docker) (NEW)
 |
 |-- commands/         # Maintained slash-entry compatibility; prefer skills/
 |   |-- plan.md             # /plan - Implementation planning
@@ -1179,7 +1180,7 @@ ECC provides Cursor IDE support with hooks, rules, agents, skills, commands, and
 | Hook Events | 15 | sessionStart, beforeShellExecution, afterFileEdit, beforeMCPExecution, beforeSubmitPrompt, and 10 more |
 | Hook Scripts | 16 | Thin Node.js scripts delegating to `scripts/hooks/` via shared adapter |
 | Rules | 34 | 9 common (alwaysApply) + 25 language-specific (TypeScript, Python, Go, Swift, PHP) |
-| Agents | 48 | `.cursor/agents/ecc-*.md` when installed; prefixed to avoid collisions with user or marketplace agents |
+| Agents | 50 | `.cursor/agents/ecc-*.md` when installed; prefixed to avoid collisions with user or marketplace agents |
 | Skills | Shared + Bundled | `.cursor/skills/` for translated additions |
 | Commands | Shared | `.cursor/commands/` if installed |
 | MCP Config | Shared | `.cursor/mcp.json` if installed |
@@ -1346,9 +1347,9 @@ The configuration is automatically detected from `.opencode/opencode.json`.
 
 | Feature | Claude Code | OpenCode | Status |
 |---------|-------------|----------|--------|
-| Agents | PASS: 48 agents | PASS: 12 agents | **Claude Code leads** |
+| Agents | PASS: 50 agents | PASS: 12 agents | **Claude Code leads** |
 | Commands | PASS: 68 commands | PASS: 31 commands | **Claude Code leads** |
-| Skills | PASS: 182 skills | PASS: 37 skills | **Claude Code leads** |
+| Skills | PASS: 188 skills | PASS: 37 skills | **Claude Code leads** |
 | Hooks | PASS: 8 event types | PASS: 11 events | **OpenCode has more!** |
 | Rules | PASS: 29 rules | PASS: 13 instructions | **Claude Code leads** |
 | MCP Servers | PASS: 14 servers | PASS: Full | **Full parity** |
@@ -1451,9 +1452,9 @@ ECC is the **first plugin to maximize every major AI coding tool**. Here's how e
 
 | Feature | Claude Code | Cursor IDE | Codex CLI | OpenCode |
 |---------|------------|------------|-----------|----------|
-| **Agents** | 48 | Shared (AGENTS.md) | Shared (AGENTS.md) | 12 |
+| **Agents** | 50 | Shared (AGENTS.md) | Shared (AGENTS.md) | 12 |
 | **Commands** | 68 | Shared | Instruction-based | 31 |
-| **Skills** | 182 | Shared | 10 (native format) | 37 |
+| **Skills** | 188 | Shared | 10 (native format) | 37 |
 | **Hook Events** | 8 types | 15 types | None yet | 11 types |
 | **Hook Scripts** | 20+ scripts | 16 scripts (DRY adapter) | N/A | Plugin hooks |
 | **Rules** | 34 (common + lang) | 34 (YAML frontmatter) | Instruction-based | 13 instructions |
