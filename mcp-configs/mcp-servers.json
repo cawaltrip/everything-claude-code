@@ -41,6 +41,16 @@
       "args": ["omega-memory", "serve"],
       "description": "Persistent agent memory with semantic search, multi-agent coordination, and knowledge graphs — run via uvx (richer than the basic memory store)"
     },
+    "opentofu": {
+      "type": "sse",
+      "url": "https://mcp.opentofu.org/sse",
+      "description": "OpenTofu Registry — providers, modules, resources, data sources via the hosted OpenTofu MCP server (no Docker, no auth). For local/airgap, swap to command+args form: `npx -y @opentofu/opentofu-mcp-server`. See skills/opentofu-mcp/SKILL.md"
+    },
+    "terraform": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:0.5.2"],
+      "description": "HashiCorp Terraform Registry — providers, modules, resources via the official MCP server. REQUIRES DOCKER locally; the upstream image is the only ship vehicle. For HCP/TFE workspaces, add `-e TFE_TOKEN -e TFE_ADDRESS` to args plus an `env` block. See skills/terraform-mcp/SKILL.md"
+    },
     "sequential-thinking": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],

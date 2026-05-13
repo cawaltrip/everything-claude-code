@@ -122,14 +122,27 @@ For modules, use `mcp__terraform__get_module_details` — same shape, same logic
 
 The HashiCorp MCP server parses `.tf` and `.tofu` files identically. Where it diverges from OpenTofu's stance is the *registry endpoint* — the server queries `registry.terraform.io` by default. For OpenTofu-only modules hosted on `registry.opentofu.org`, you'll get a miss; check the OT registry directly for those. Resource and provider schemas are identical between runtimes through 1.x.
 
-> OpenTofu-only features (state encryption 1.7+, provider iteration 1.7+) won't appear in `registry.terraform.io` schema responses but are documented in OpenTofu's own docs. The MCP server is authoritative for shared TF/OT schema; OpenTofu-only features need the OT documentation directly.
+> OpenTofu-only features (state encryption 1.7+, provider iteration 1.7+) won't appear in `registry.terraform.io` schema responses but are documented in OpenTofu's own docs. The MCP server is authoritative for shared TF/OT schema; OpenTofu-only features need the OT documentation directly — or, if the sibling [`skills/opentofu-mcp/SKILL.md`](../opentofu-mcp/SKILL.md) is configured, route those queries to `mcp__opentofu__*` per the Routing rule below.
+
+## Routing: When Both MCP Servers Are Configured
+
+If both the OpenTofu MCP server (`mcp__opentofu__*` tools) and the HashiCorp Terraform MCP server (`mcp__terraform__*` tools) are connected, prefer one server's tools over the other using the convention from [`rules/terraform/hooks.md`](../../rules/terraform/hooks.md):
+
+1. **Env override**: if `ECC_TF_BINARY=tofu` is set, prefer `mcp__opentofu__*` tools. If `ECC_TF_BINARY=terraform`, prefer `mcp__terraform__*` tools.
+2. **PATH detection**: if `tofu` is the only binary on PATH, prefer `mcp__opentofu__*`. If `terraform` is the only binary on PATH, prefer `mcp__terraform__*`. If both binaries are present and `ECC_TF_BINARY` is unset, default to `mcp__opentofu__*` (matches the hooks rule's "prefer tofu when ambiguous").
+3. **File-extension tiebreaker**: when the rules above are ambiguous, the file being worked on settles it. `.tofu` → `mcp__opentofu__*`. `.tf` → fall back to the env/PATH default.
+4. **OT-only feature override**: regardless of the rules above, route OpenTofu-only feature queries (state encryption 1.7+, provider iteration 1.7+) to `mcp__opentofu__*` — the HashiCorp server's registry doesn't carry OpenTofu-only resource schemas.
+
+This routing is *agent-side guidance*, not an MCP-protocol enforcement. Both servers can be enabled simultaneously; the agent picks which server's tools to reach for based on the rules above. Users with strong preferences should set `ECC_TF_BINARY` explicitly.
 
 ## Cross-References
 
+- [`skills/opentofu-mcp/SKILL.md`](../opentofu-mcp/SKILL.md) — sibling skill for the OpenTofu MCP server; routing rule above governs which to use when both are connected
 - [`skills/terraform-testing/SKILL.md`](../terraform-testing/SKILL.md) — primary consumer; uses MCP for schema validation in tests
 - [`skills/terraform-patterns/SKILL.md`](../terraform-patterns/SKILL.md) — version-management section; this skill replaces the snapshot-in-markdown approach with live lookup
 - [`agents/terraform-reviewer.md`](../../agents/terraform-reviewer.md) — review tasks that need to confirm schema or version assumptions
 - [`agents/terraform-build-resolver.md`](../../agents/terraform-build-resolver.md) — debugging schema-target errors during init/validate/plan
+- [`rules/terraform/hooks.md`](../../rules/terraform/hooks.md) — canonical binary-detection convention mirrored by the Routing section above
 
 ---
 
